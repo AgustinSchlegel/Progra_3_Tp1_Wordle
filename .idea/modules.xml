@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Progra_3_Tp1_Wordle.iml" filepath="$PROJECT_DIR$/.idea/Progra_3_Tp1_Wordle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wordle/wordle.iml" filepath="$PROJECT_DIR$/wordle/wordle.iml" />
     </modules>
   </component>
 </project>
