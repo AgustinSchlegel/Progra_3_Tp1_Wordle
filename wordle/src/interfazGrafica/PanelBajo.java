@@ -22,14 +22,14 @@ public class PanelBajo extends Panel{
 	private void generarSeccionBaja(JPanel panelBajo,Color color ) {
 		//El cuadro donde el usuario escribira el texto y el formato
 		JTextField campoTexto = new JTextField();
-		campoTexto.setFont(new Font("Arial", Font.BOLD, 20)); // Letra más grande para que se vea bien
-		campoTexto.setHorizontalAlignment(JTextField.CENTER); // Centrar el texto escrito
+		campoTexto.setFont(new Font("Arial", Font.BOLD, 20));
+		campoTexto.setHorizontalAlignment(JTextField.CENTER);
 		campoTexto.setPreferredSize(new Dimension(250, 50));
 
 		//Boton para enviar y verificar la palabra
 		JButton botonAceptar = new JButton("ENVIAR");
 		botonAceptar.setPreferredSize(new Dimension(120, 50));
-		botonAceptar.setBackground(new Color(83, 141, 78)); // Un verde tipo Wordle
+		botonAceptar.setBackground(new Color(83, 141, 78));
 		botonAceptar.setForeground(Color.WHITE);
 		botonAceptar.setFocusPainted(false);
 
@@ -42,7 +42,7 @@ public class PanelBajo extends Panel{
 				JOptionPane.showMessageDialog(this, "La palabra debe tener 5 letras");
 			}
 		});
-		// Añadimos al contenedor pasado por parámetro
+
 		panelBajo.add(campoTexto, BorderLayout.CENTER);
 		panelBajo.add(botonAceptar, BorderLayout.EAST);
 
