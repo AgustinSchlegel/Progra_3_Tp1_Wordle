@@ -26,19 +26,36 @@ public class menu extends JFrame{
 
         iniciarPartida.setPreferredSize(new Dimension(200, 50));
         iniciarPartida.addActionListener(e -> {
-
+            wordle.Tablero();
 //      aca se deberia de iniciar el tablero, junto al contador
+            this.dispose();
     });
 
         JButton idioma = new JButton("Idioma");
         idioma.setPreferredSize(new Dimension(200, 50));
         idioma.addActionListener(e -> {
+            String[] opciones = {"Español", "English", "Português","Deutsch","Avañe'ẽ"};
+            int seleccion = JOptionPane.showOptionDialog(
+                    idioma,
+                    "Seleccione el idioma de juego:",
+                    "Configuración",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+            );
+
+                System.out.println(seleccion);
+
             //aca se deberia de crear una ventana donde retorne el idioma que se jugara
         });
 
         JButton ranking = new JButton("Ranking");
         ranking.setPreferredSize(new Dimension(200, 50));
         ranking.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this,
+                    "Ranking: ");
          //Aca se deberia de mostrar el ranking de mejores tiempos
         });
 
