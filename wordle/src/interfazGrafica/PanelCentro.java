@@ -29,9 +29,12 @@ public class PanelCentro extends Panel {
 	protected void generarGrilla(JPanel centrado) {
 		for(int i=0;i<25;i++) {
 			bloque_Letra bloque = new bloque_Letra();
+
 			centrado.add(bloque);
 		}	
 	}
+	
+	
 	
 	
 }

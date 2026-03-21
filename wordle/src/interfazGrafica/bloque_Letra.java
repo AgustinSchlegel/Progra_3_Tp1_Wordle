@@ -19,4 +19,9 @@ public class bloque_Letra extends JLabel{
 		setBackground(colorBloque);
 		//setFont(miFuente);
 	}
+	
+	public void cargarLetra() {
+		
+	}
+	
 }
