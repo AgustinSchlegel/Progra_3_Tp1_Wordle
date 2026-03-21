@@ -1,4 +1,4 @@
-package tp;
+package interfazGrafica;
 
 import java.awt.Color;
 import java.awt.Dimension;
