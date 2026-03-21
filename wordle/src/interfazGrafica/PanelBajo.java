@@ -1,13 +1,8 @@
 package interfazGrafica;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class PanelBajo extends Panel{
 
@@ -17,26 +12,42 @@ public class PanelBajo extends Panel{
 	
 	public PanelBajo() {
 	    Color colorSeccionBaja = new Color(37, 37, 37);
-	    setPreferredSize(new Dimension(500, 100));
-		JPanel panelBajo = new JPanel();
-		generarSeccionBaja(panelBajo,colorSeccionBaja);
+	    this.setPreferredSize(new Dimension(500, 100));
+		this.setLayout(new BorderLayout());
+
+		generarSeccionBaja(this,colorSeccionBaja);
 	}
 
 	//no se como acomodar el de ingresar palabra y el aceptar sin acomodarlos en el metodo directamente. Si pudiera lo haria
 	private void generarSeccionBaja(JPanel panelBajo,Color color ) {
-		JTextField ingresarPalabra = new JTextField();
-		ingresarPalabra.setPreferredSize(new Dimension(400, 100));
-		setOpaque(true);
-		setBackground(color);		
-		
-		JButton aceptar = new JButton();
-		aceptar.setPreferredSize(new Dimension(400, 100));
-		setOpaque(true);
-		setBackground(color);
-		
-		panelBajo.setLayout(new GridLayout());
-		panelBajo.add(ingresarPalabra, BorderLayout.WEST); 
-		panelBajo.add(aceptar, BorderLayout.EAST);
+		//El cuadro donde el usuario escribira el texto y el formato
+		JTextField campoTexto = new JTextField();
+		campoTexto.setFont(new Font("Arial", Font.BOLD, 20)); // Letra más grande para que se vea bien
+		campoTexto.setHorizontalAlignment(JTextField.CENTER); // Centrar el texto escrito
+		campoTexto.setPreferredSize(new Dimension(250, 50));
+
+		//Boton para enviar y verificar la palabra
+		JButton botonAceptar = new JButton("ENVIAR");
+		botonAceptar.setPreferredSize(new Dimension(120, 50));
+		botonAceptar.setBackground(new Color(83, 141, 78)); // Un verde tipo Wordle
+		botonAceptar.setForeground(Color.WHITE);
+		botonAceptar.setFocusPainted(false);
+
+		//Verifica que la palabra sea de 5 letras
+		botonAceptar.addActionListener(e -> {
+			String palabra = campoTexto.getText().toUpperCase();
+			if (palabra.length() == 5) {
+				campoTexto.setText(""); //limpia el cuadro una vez se envia la palabra
+			} else {
+				JOptionPane.showMessageDialog(this, "La palabra debe tener 5 letras");
+			}
+		});
+		// Añadimos al contenedor pasado por parámetro
+		panelBajo.add(campoTexto, BorderLayout.CENTER);
+		panelBajo.add(botonAceptar, BorderLayout.EAST);
+
+		panelBajo.revalidate();
+		panelBajo.repaint();
 	}
 
 	
