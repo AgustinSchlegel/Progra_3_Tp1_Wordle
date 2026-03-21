@@ -50,6 +50,4 @@ public class PanelBajo extends Panel{
 		panelBajo.repaint();
 	}
 
-	
-
 }
