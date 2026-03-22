@@ -43,7 +43,7 @@ public class Panel_Menu extends Panel{
 	    idioma.addActionListener(e -> {
 	        String[] opciones = {"Español", "English", "Português","Deutsch","Avañe'ẽ"};
 	        int seleccion = JOptionPane.showOptionDialog(
-	                this, // Usa 'this' (el panel) como padre, no el botón
+	                this,
 	                "Seleccione el idioma de juego:",
 	                "Configuración",
 	                JOptionPane.DEFAULT_OPTION,
@@ -75,6 +75,9 @@ public class Panel_Menu extends Panel{
 	    });
 	    c.gridy = 3;
 	    add(salir, c);
+	    
+	    //Palabra seleccionada
+	    //String palabraJuego = obtenerPalabras();
 
 	}
 }
