@@ -8,7 +8,7 @@ public class ComparadorPalabras {
 	String adivinar;
 	String secreto;
 	
-	Map<Character,Integer> contador;
+	Map<Character,Integer> contador; //Cantidad de ves que aparece cada letra
 	
 
 	public ComparadorPalabras(String adivinar, String secreto) {
@@ -35,6 +35,22 @@ public class ComparadorPalabras {
 				contador.put(a, contador.get(a) - 1);
 			}
 		}
+		
+		for (int i = 0; i < adivinar.length(); i++) {
+		    char g = adivinar.charAt(i);
+
+		    if (palabra[i] == null) { // no fue verde
+
+		        if (contador.getOrDefault(g, 0) > 0) {
+		            palabra[i] = EstadoLetra.AMARILLO;
+
+		            // Resta la cantidad de veces que aparece
+		            contador.put(g, contador.get(g) - 1);
+
+		        } else {
+		            palabra[i] = EstadoLetra.ROJO;
+		        }
+		    }
 		return palabra;
 	}
 }
