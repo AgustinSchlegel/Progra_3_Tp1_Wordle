@@ -7,7 +7,7 @@ public class ComparadorPalabras {
 
 	String secreto;
 	
-	public ComparadorPalabras(String adivinar) {
+	public ComparadorPalabras(String secreto) {
 		
 		this.secreto = secreto.toUpperCase();
 	}
@@ -16,7 +16,9 @@ public class ComparadorPalabras {
 
 		EstadoLetra[] palabra = new EstadoLetra[secreto.length()];
 		
-		Map<Character, Integer> contador = contarLetras(intento);
+		Map<Character, Integer> contador = contarLetras(intento); //Letra -> cantidad de veces que aparece
+		
+		//Letras acertadas
 		
 		for (int i = 0; i < secreto.length(); i++) {
 
@@ -28,6 +30,8 @@ public class ComparadorPalabras {
 			}
 		}
 
+		//Letras que aparecen
+		
 		for (int i = 0; i < secreto.length(); i++) {
 			char g = secreto.charAt(i);
 
@@ -52,7 +56,7 @@ public class ComparadorPalabras {
 		Map<Character, Integer> contador = new HashMap<>();
 
 	    for (char c : palabra.toCharArray()) {
-	        contador.put(c, contador.getOrDefault(c, 0) + 1);
+	        contador.put(c, contador.getOrDefault(c, 0) + 1); //Cada vez que aparece una letra, suma 1. En caso de que no exista, pone 0
 	    }
 		return contador;
 		

@@ -12,8 +12,8 @@ public class SistemaLogica {
 	
 	public EstadoLetra[] intentar(String palabra) {
         intentos++;
-        ComparadorPalabras comp = new ComparadorPalabras(palabra, palabraSecreta);
-        return comp.comparar();
+        ComparadorPalabras comp = new ComparadorPalabras(palabraSecreta);
+        return comp.comparar(palabra);
     }
 
     public boolean victoria(String palabra) {
