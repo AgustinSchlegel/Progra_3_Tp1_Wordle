@@ -3,11 +3,11 @@ package sistema;
 import java.util.HashMap;
 
 public class palabras_jugables {
-	static String[] palabras_español = {"Veloz","Libro","Piano","Arbol","Playa"};
-	static String[] palabras_guarani = {"Kunuũ","Pyagu","Yvytu","Yvoty","Piraĩ"};
-	static String[] palabras_ingles = {"Light","Water","Sound","Earth","Bread"};
-	static String[] palabras_aleman = {"Apfel","Musik","Tisch","Glück","Stadt"};
-	HashMap<String, String[]> idiomas;
+	public static String[] palabras_español = {"veloz","libro","piano","arbol","playa"};
+	public static String[] palabras_guarani = {"kunuũ","pyagu","yvytu","yvoty","piraĩ"};
+	public static String[] palabras_ingles = {"light","water","sound","earth","bread"};
+	public static String[] palabras_aleman = {"apfel","musik","tisch","glück","stadt"};
+	HashMap<String, String[]> idiomas = new HashMap<>();
 	
 	
 	public palabras_jugables() {

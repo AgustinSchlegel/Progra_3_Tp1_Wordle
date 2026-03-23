@@ -51,20 +51,24 @@ public class PanelSuperior extends Panel{
 		cronometro.scheduleAtFixedRate(task, 1000, 1000);
 	}
 
-	private void actualizarTiempo() {
+	public void actualizarTiempo() {
 		Runnable runnable = new Runnable() {
 			public void run() {
-				int minutos = tiempoTranscurrido / 60;
-				int segundos = tiempoTranscurrido % 60;
-				labelTiempo.setText(String.format("%02d:%02d", minutos, segundos));
+				labelTiempo.setText(getTiempo());
 			}
 		};
 		EventQueue.invokeLater(runnable);	
 	}
 
-	private void pararCronometro() {
+	public void pararCronometro() {
 		if (cronometro != null) {
 			cronometro.cancel();
 		}
+	}
+
+	public String getTiempo() {
+		int minutos = tiempoTranscurrido / 60;
+	    int segundos = tiempoTranscurrido % 60;
+	    return String.format("%02d:%02d", minutos, segundos);
 	}
 }

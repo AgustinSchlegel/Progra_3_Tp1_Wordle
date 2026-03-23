@@ -4,5 +4,5 @@ public enum EstadoLetra {
 
 	VERDE,
 	AMARILLO,
-	ROJO
+	GRIS
 }

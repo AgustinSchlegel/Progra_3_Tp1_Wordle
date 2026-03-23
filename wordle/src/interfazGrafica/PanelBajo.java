@@ -5,6 +5,8 @@ import java.awt.*;
 import javax.swing.*;
 
 public class PanelBajo extends Panel{
+	
+	private Tablero tablero;
 
 	public static void main(String[] args) {
 		new PanelBajo();
@@ -18,6 +20,7 @@ public class PanelBajo extends Panel{
 		generarSeccionBaja(this,colorSeccionBaja);
 	}
 
+	
 	//no se como acomodar el de ingresar palabra y el aceptar sin acomodarlos en el metodo directamente. Si pudiera lo haria
 	private void generarSeccionBaja(JPanel panelBajo,Color color ) {
 		//El cuadro donde el usuario escribira el texto y el formato
@@ -37,7 +40,10 @@ public class PanelBajo extends Panel{
 		botonAceptar.addActionListener(e -> {
 			String palabra = campoTexto.getText().toUpperCase();
 			if (palabra.length() == 5) {
-				campoTexto.setText(""); //limpia el cuadro una vez se envia la palabra
+				 if (tablero != null) {
+	                    tablero.procesarPalabra(palabra);
+	                }
+				 campoTexto.setText(""); //limpia el cuadro una vez se envia la palabra
 			} else {
 				JOptionPane.showMessageDialog(this, "La palabra debe tener 5 letras");
 			}
@@ -49,5 +55,9 @@ public class PanelBajo extends Panel{
 		panelBajo.revalidate();
 		panelBajo.repaint();
 	}
+	
+	public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
 
 }

@@ -13,8 +13,8 @@ public class ComparadorPalabras {
 
 	public ComparadorPalabras(String adivinar, String secreto) {
 		
-		this.adivinar = adivinar;
-		this.secreto = secreto;
+		this.adivinar = adivinar.toUpperCase();
+		this.secreto = secreto.toUpperCase();
 		this.contador = new HashMap<Character, Integer>();
 		
 		for (char c : secreto.toCharArray()) {
@@ -25,14 +25,19 @@ public class ComparadorPalabras {
 	public EstadoLetra[] comparar() {
 
 		EstadoLetra[] palabra = new EstadoLetra[adivinar.length()];
-
+		
+		Map<Character, Integer> contador = new HashMap<>();
+	    for (char c : secreto.toCharArray()) {
+	        contador.put(c, contador.getOrDefault(c, 0) + 1);
+	    }
+	    
 		for (int i = 0; i < adivinar.length(); i++) {
 
 			char a = adivinar.charAt(i);
 
 			if (adivinar.charAt(i) == secreto.charAt(i)) {
 				palabra[i] = EstadoLetra.VERDE;
-				contador.put(a, contador.get(a) - 1);
+				contador.put(a, contador.getOrDefault(a, 0) - 1);
 			}
 		}
 
@@ -45,10 +50,10 @@ public class ComparadorPalabras {
 					palabra[i] = EstadoLetra.AMARILLO;
 
 					// Resta la cantidad de veces que aparece
-					contador.put(g, contador.get(g) - 1);
+					contador.put(g, contador.getOrDefault(g, 0) - 1);
 
 				} else {
-					palabra[i] = EstadoLetra.ROJO;
+					palabra[i] = EstadoLetra.GRIS;
 				}
 			}
 		}

@@ -7,11 +7,14 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 public class PanelCentro extends Panel {
-
-	public static void main(String[] args) {
+	
+	private bloque_Letra[][] grilla;
+    private int filaActual = 0;
+    
+    public static void main(String[] args) {
 		new PanelCentro();
 	}
-	
+    
 	public PanelCentro() {
 	    Color colorCuadrilla = new Color(30, 30, 30);
 		JPanel centrado = new JPanel();		
@@ -22,18 +25,28 @@ public class PanelCentro extends Panel {
         centrado.setBackground(colorCuadrilla);
         
         this.add(centrado);
-        generarGrilla(centrado); 
+        grilla = new bloque_Letra[5][5];
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                bloque_Letra bloque = new bloque_Letra();
+                grilla[i][j] = bloque;
+                centrado.add(bloque);
+            }
+        }
 	} 
 	
-	//aprovecha la clase de bloque para crear la tabla
-	protected void generarGrilla(JPanel centrado) {
-		for(int i=0;i<25;i++) {
-			bloque_Letra bloque = new bloque_Letra();
+	public void mostrarResultado(String palabra, EstadoLetra[] estados) {
+		if (filaActual >= 6) return;
+		
+		int limite = Math.min(palabra.length(), 5);
+		
+        for (int i = 0; i < limite; i++) {
+            grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
+        }
 
-			centrado.add(bloque);
-		}	
-	}
-	
+        filaActual++;
+    }
 	
 	
 	
