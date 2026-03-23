@@ -5,44 +5,31 @@ import java.util.Map;
 
 public class ComparadorPalabras {
 
-	String adivinar;
 	String secreto;
 	
-	Map<Character,Integer> contador; //Cantidad de ves que aparece cada letra
-	
-
-	public ComparadorPalabras(String adivinar, String secreto) {
+	public ComparadorPalabras(String adivinar) {
 		
-		this.adivinar = adivinar.toUpperCase();
 		this.secreto = secreto.toUpperCase();
-		this.contador = new HashMap<Character, Integer>();
-		
-		for (char c : secreto.toCharArray()) {
-		    contador.put(c, contador.getOrDefault(c, 0) + 1);
-		}
 	}
 	
-	public EstadoLetra[] comparar() {
+	public EstadoLetra[] comparar(String intento) {
 
-		EstadoLetra[] palabra = new EstadoLetra[adivinar.length()];
+		EstadoLetra[] palabra = new EstadoLetra[secreto.length()];
 		
-		Map<Character, Integer> contador = new HashMap<>();
-	    for (char c : secreto.toCharArray()) {
-	        contador.put(c, contador.getOrDefault(c, 0) + 1);
-	    }
-	    
-		for (int i = 0; i < adivinar.length(); i++) {
+		Map<Character, Integer> contador = contarLetras(intento);
+		
+		for (int i = 0; i < secreto.length(); i++) {
 
-			char a = adivinar.charAt(i);
+			char a = secreto.charAt(i);
 
-			if (adivinar.charAt(i) == secreto.charAt(i)) {
+			if (secreto.charAt(i) == intento.charAt(i)) {
 				palabra[i] = EstadoLetra.VERDE;
 				contador.put(a, contador.getOrDefault(a, 0) - 1);
 			}
 		}
 
-		for (int i = 0; i < adivinar.length(); i++) {
-			char g = adivinar.charAt(i);
+		for (int i = 0; i < secreto.length(); i++) {
+			char g = secreto.charAt(i);
 
 			if (palabra[i] == null) { // no fue verde
 
@@ -58,5 +45,16 @@ public class ComparadorPalabras {
 			}
 		}
 		return palabra;
+	}
+	
+	public Map<Character,Integer> contarLetras(String palabra){
+		
+		Map<Character, Integer> contador = new HashMap<>();
+
+	    for (char c : palabra.toCharArray()) {
+	        contador.put(c, contador.getOrDefault(c, 0) + 1);
+	    }
+		return contador;
+		
 	}
 }
