@@ -7,27 +7,31 @@ public class palabras_jugables {
 	public static String[] palabras_guarani = {"kunuũ","pyagu","yvytu","yvoty","piraĩ"};
 	public static String[] palabras_ingles = {"light","water","sound","earth","bread"};
 	public static String[] palabras_aleman = {"apfel","musik","tisch","glück","stadt"};
-	HashMap<String, String[]> idiomas = new HashMap<>();
+	public static String[] palabras_portugues = {"Tempo", "Plano", "Noite", "Festa", "Livro"};
+
+	static HashMap<String, String[]> idiomas = new HashMap<>();
 	
-	
-	public palabras_jugables() {
-        // Así se agregan correctamente:
-		idiomas.put("Español", palabras_español);
-        idiomas.put("Guarani", palabras_guarani);
-        idiomas.put("Ingles", palabras_ingles);
-        idiomas.put("Aleman", palabras_aleman);
+	static {
+        idiomas.put("Español", palabras_español);
+        idiomas.put("English", palabras_ingles);
+        idiomas.put("Português", palabras_portugues);
+        idiomas.put("Deutsch", palabras_aleman);
+        idiomas.put("Avañe'ẽ", palabras_guarani);
     }
 	
 	public String[] obtenerPalabras(String idiomaElegido) {
         return idiomas.get(idiomaElegido);
     }
 	
-	public static String seleccionarPalabra(String[]idioma) {
-		int random = (int)(Math.random() * 5);
-		String palabra = idioma[random];
-		return palabra;
-	}
-	
-	
-	
+	public static String seleccionarPalabra(String nombreIdioma) {
+        String[] diccionario = idiomas.get(nombreIdioma);
+
+        // Si hay algún error, cargamos español por defecto para evitar que explote
+        if (diccionario == null) {
+            diccionario = idiomas.get("Español");
+        }
+
+        int random = (int)(Math.random() * diccionario.length);
+        return diccionario[random];
+    }
 }

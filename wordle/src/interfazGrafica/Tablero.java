@@ -7,33 +7,35 @@ import java.awt.*;
 
 // 1. Ahora la clase HEREDA de JPanel
 public class Tablero extends JPanel {
-	
+    private String idioma;
 	private SistemaLogica juego;
-	private PanelSuperior panelSuperior;
-	private PanelCentro panelCentro;
-    // private JFrame frame; <-- ESTO SE BORRA, ya no lo necesitas aquí.
+	PanelSuperior panelSuperior;
+	PanelCentro panelCentro;
+	PanelBajo panelBajo;
 
-    public Tablero() {
-        // 2. Configuramos el layout del propio panel
+    public Tablero(String idiomaRecibido) {
+        this.idioma = idiomaRecibido; 
         setLayout(new BorderLayout());
         generarEntorno();
     }
 
-    private void generarEntorno() {
-        panelSuperior = new PanelSuperior(); 
-        panelCentro = new PanelCentro(); 
-        PanelBajo panelBajo = new PanelBajo(); 
+    public void generarEntorno() {
+    	panelSuperior= new PanelSuperior(); 
+    	panelCentro= new PanelCentro(); 
+        panelBajo = new PanelBajo(); 
         
-        String palabra = palabras_jugables.seleccionarPalabra(palabras_jugables.palabras_español);
-        juego = new SistemaLogica(palabra);
+
+        String palabra = palabras_jugables.seleccionarPalabra(this.idioma);
+        
+        this.juego = new SistemaLogica(palabra);
         panelBajo.setTablero(this);
         
-        // 3. Agregamos directamente al panel (this)
+        //Agregamos directamente al panel (this)
         add(panelSuperior, BorderLayout.NORTH); 
         add(panelCentro, BorderLayout.CENTER); 
         add(panelBajo, BorderLayout.SOUTH);
         
-        // 4. Iniciamos el cronómetro
+        //Iniciamos el cronómetro
         panelSuperior.iniciarCronometro();
     }
 
