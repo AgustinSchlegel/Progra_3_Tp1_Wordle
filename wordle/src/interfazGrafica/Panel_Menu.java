@@ -8,35 +8,22 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import sistema.SistemaLogica;
+import sistema.palabras_jugables;
+
 public class Panel_Menu extends Panel{
+	String idiomaSeleccionado = "Español"; //Lo dejamos asi para que siempre halla un idioma por defecto
 	public Panel_Menu() {
-	    // 1. Definir el Layout del Panel
 	    setLayout(new GridBagLayout()); 
 	    GridBagConstraints c = new GridBagConstraints();
 	    c.insets = new Insets(10, 10, 10, 10);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    
 	//Implementacion de Botones
-	    
-	    //Iniciar
-	    JButton iniciarPartida = new JButton("Iniciar Partida");
-	    iniciarPartida.setPreferredSize(new Dimension(200, 50));
-	    iniciarPartida.addActionListener(e -> {
-	        JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
-	        
-	        Tablero nuevoTablero = new Tablero();
-	        ventana.setContentPane(nuevoTablero);
-	        
-	        ventana.revalidate();
-	        ventana.repaint();
-	        ventana.pack(); 
-	        ventana.setLocationRelativeTo(null); 
-	    });
-	    c.gridy = 0; // Fila 0
-	    add(iniciarPartida, c);
-
+	  	    
 	    //Elegir idioma
 	    JButton idioma = new JButton("Idioma");
 	    idioma.setPreferredSize(new Dimension(200, 50));
@@ -49,11 +36,15 @@ public class Panel_Menu extends Panel{
 	                JOptionPane.DEFAULT_OPTION,
 	                JOptionPane.QUESTION_MESSAGE,
 	                null, opciones, opciones[0]);
-	        System.out.println("Seleccionaste: " + seleccion);
-	    });
-	    c.gridy = 1; // Fila 1
-	    add(idioma, c);
 
+	        if (seleccion != -1) {
+	            idiomaSeleccionado = opciones[seleccion];
+	            System.out.println("Idioma guardado: " + idiomaSeleccionado);
+	        }
+	    });
+	    c.gridy = 1; 
+	    add(idioma, c);
+	    
 	    //Ranking
 	    JButton ranking = new JButton("Ranking");
 	    ranking.setPreferredSize(new Dimension(200, 50));
@@ -76,8 +67,24 @@ public class Panel_Menu extends Panel{
 	    c.gridy = 3;
 	    add(salir, c);
 	    
-	    //Palabra seleccionada
-	    //String palabraJuego = obtenerPalabras();
+	    //Iniciar
+	    JButton iniciarPartida = new JButton("Iniciar Partida");
+	    iniciarPartida.setPreferredSize(new Dimension(200, 50));
+	    iniciarPartida.addActionListener(e -> {
+	    	JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
 
+	    	Tablero nuevoTablero = new Tablero(idiomaSeleccionado);
+
+	    	ventana.setContentPane(nuevoTablero);            
+	    	ventana.revalidate(); 
+	    	ventana.repaint();
+	    });
+	    c.gridy = 0; 
+	    add(iniciarPartida, c);
+
+	}
+	
+	public String getIdiomaSeleccionado() {
+		return idiomaSeleccionado;
 	}
 }

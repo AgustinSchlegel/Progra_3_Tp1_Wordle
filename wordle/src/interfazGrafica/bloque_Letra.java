@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 import sistema.EstadoLetra;
 
 public class bloque_Letra extends JLabel{
@@ -19,6 +21,7 @@ public class bloque_Letra extends JLabel{
 		setOpaque(true);
 		setBackground(colorBloque);
 		setFont(miFuente);
+		this.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
 	public void cargarLetra(char letra, EstadoLetra estado) {
