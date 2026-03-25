@@ -9,7 +9,7 @@ import sistema.EstadoLetra;
 
 public class PanelCentro extends Panel {
 	
-	private bloque_Letra[][] grilla;
+	private BloqueLetra[][] grilla;
     private int filaActual = 0;
     
     public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class PanelCentro extends Panel {
 	}
     
 	public PanelCentro() {
-	    Color colorCuadrilla = new Color(30, 30, 30);
+	    Color colorCuadrilla = new Color(30, 30, 30); //Azul
 		JPanel centrado = new JPanel();		
 		
 		//le da tamaño y margen de acomodo a los bloques generados por el metodo generarGrilla
@@ -26,11 +26,11 @@ public class PanelCentro extends Panel {
         centrado.setBackground(colorCuadrilla);
         
         this.add(centrado);
-        grilla = new bloque_Letra[5][5];
+        grilla = new BloqueLetra[5][5];
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                bloque_Letra bloque = new bloque_Letra();
+                BloqueLetra bloque = new BloqueLetra();
                 grilla[i][j] = bloque;
                 centrado.add(bloque);
             }

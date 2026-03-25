@@ -16,37 +16,31 @@ public class ComparadorPalabras {
 
 		EstadoLetra[] palabra = new EstadoLetra[secreto.length()];
 		
-		Map<Character, Integer> contador = contarLetras(intento); //Letra -> cantidad de veces que aparece
-		
-		//Letras acertadas
-		
+		Map<Character, Integer> contador = contarLetras(secreto);
+
+		// Verdes
 		for (int i = 0; i < secreto.length(); i++) {
+		    if (secreto.charAt(i) == intento.charAt(i)) {
+		        palabra[i] = EstadoLetra.VERDE;
 
-			char a = secreto.charAt(i);
-
-			if (secreto.charAt(i) == intento.charAt(i)) {
-				palabra[i] = EstadoLetra.VERDE;
-				contador.put(a, contador.getOrDefault(a, 0) - 1);
-			}
+		        char letra = intento.charAt(i);
+		        contador.put(letra, contador.get(letra) - 1);
+		    }
 		}
 
-		//Letras que aparecen
-		
+		// Amarillos y grises
 		for (int i = 0; i < secreto.length(); i++) {
-			char g = secreto.charAt(i);
+		    if (palabra[i] == null) {
 
-			if (palabra[i] == null) { // no fue verde
+		        char letra = intento.charAt(i);
 
-				if (contador.getOrDefault(g, 0) > 0) {
-					palabra[i] = EstadoLetra.AMARILLO;
-
-					// Resta la cantidad de veces que aparece
-					contador.put(g, contador.getOrDefault(g, 0) - 1);
-
-				} else {
-					palabra[i] = EstadoLetra.GRIS;
-				}
-			}
+		        if (contador.getOrDefault(letra, 0) > 0) {
+		            palabra[i] = EstadoLetra.AMARILLO;
+		            contador.put(letra, contador.get(letra) - 1);
+		        } else {
+		            palabra[i] = EstadoLetra.GRIS;
+		        }
+		    }
 		}
 		return palabra;
 	}
