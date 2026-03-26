@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import sistema.EstadoLetra;
-
+import interfazGrafica.*;
 public class PanelCentro extends Panel {
 	
 	private BloqueLetra[][] grilla;
@@ -17,6 +17,7 @@ public class PanelCentro extends Panel {
 	}
     
 	public PanelCentro() {
+		
 	    Color colorCuadrilla = new Color(30, 30, 30); //Azul
 		JPanel centrado = new JPanel();		
 		
@@ -43,7 +44,7 @@ public class PanelCentro extends Panel {
 		int limite = Math.min(palabra.length(), 5);
 		
         for (int i = 0; i < limite; i++) {
-            grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
+        	grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
         }
 
         filaActual++;
