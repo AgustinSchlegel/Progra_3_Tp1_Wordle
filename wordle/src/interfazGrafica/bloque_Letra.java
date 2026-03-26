@@ -29,10 +29,10 @@ public class bloque_Letra extends JLabel{
 		
 		switch(estado) {
 		case VERDE:
-			setBackground(Color.GREEN);
+			setBackground(new Color(83, 141, 78));
             break;
         case AMARILLO:
-            setBackground(Color.YELLOW);
+            setBackground(new Color(181, 159, 59));
             break;
         case GRIS:
             setBackground(Color.GRAY);
