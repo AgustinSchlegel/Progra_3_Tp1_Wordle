@@ -26,7 +26,6 @@ public class palabras_jugables {
 	public static String seleccionarPalabra(String nombreIdioma) {
         String[] diccionario = idiomas.get(nombreIdioma);
 
-        // Si hay algún error, cargamos español por defecto para evitar que explote
         if (diccionario == null) {
             diccionario = idiomas.get("Español");
         }

@@ -41,8 +41,10 @@ public class Tablero extends JPanel {
 
 	public void procesarPalabra(String palabra) {
 		EstadoLetra[] resultado = juego.intentar(palabra);
-		panelCentro.mostrarResultado(palabra, resultado);
-		
+		int intentos = juego.getIntentos();
+		panelCentro.mostrarResultado(palabra, resultado,intentos);		//SI NO PONGO EL -1 EL JUEGO EMPIEZA DESDE LA SEGUNDA FILA
+		juego.sumarIntento();
+
 		if(juego.victoria(palabra)) {
 			JOptionPane.showMessageDialog(this, "¡Ganaste!" + 
 					"\nTiempo: " + panelSuperior.getTiempo());

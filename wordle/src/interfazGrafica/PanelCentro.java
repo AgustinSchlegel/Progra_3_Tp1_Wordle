@@ -10,7 +10,6 @@ import sistema.EstadoLetra;
 public class PanelCentro extends Panel {
 	
 	private bloque_Letra[][] grilla;
-    private int filaActual = 0;
     
     public static void main(String[] args) {
 		new PanelCentro();
@@ -37,7 +36,7 @@ public class PanelCentro extends Panel {
         }
 	} 
 	
-	public void mostrarResultado(String palabra, EstadoLetra[] estados) {
+	public void mostrarResultado(String palabra, EstadoLetra[] estados,int filaActual) {
 		if (filaActual >= 6) return;
 		
 		int limite = Math.min(palabra.length(), 5);
