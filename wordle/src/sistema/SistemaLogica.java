@@ -34,4 +34,8 @@ public class SistemaLogica {
 	public void sumarIntento() {
 		this.intentos++;		
 	}
+	
+	public int INTENTOS_MAXIMOS() {
+		return this.max_intentos;
+	}
 }
