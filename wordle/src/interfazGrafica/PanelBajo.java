@@ -4,9 +4,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import sistema.SistemaLogica;
+
 public class PanelBajo extends Panel{
 	
-	private Tablero tablero;
+	private EscuchadorJuego escuchador;
 
 	public static void main(String[] args) {
 		new PanelBajo();
@@ -39,9 +41,9 @@ public class PanelBajo extends Panel{
 		//Verifica que la palabra sea de 5 letras
 		botonAceptar.addActionListener(e -> {
 			String palabra = campoTexto.getText().toUpperCase();
-			if (palabra.length() == 5) {
-				 if (tablero != null) {
-	                    tablero.procesarPalabra(palabra);
+			if (palabra.length() == escuchador.darIntentosMaximos()) {
+				 if (escuchador != null) {
+					 escuchador.procesarPalabra(palabra);
 	                }
 				 campoTexto.setText(""); //limpia el cuadro una vez se envia la palabra
 			} else {
@@ -56,8 +58,9 @@ public class PanelBajo extends Panel{
 		panelBajo.repaint();
 	}
 	
-	public void setTablero(Tablero tablero) {
-        this.tablero = tablero;
+
+	public void setReceptor(EscuchadorJuego r) {
+        this.escuchador = r;
     }
 
 }
