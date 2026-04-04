@@ -45,23 +45,24 @@ public class Tablero extends JPanel implements EscuchadorJuego {
     }
 
 	public void procesarPalabra(String palabra) {
+		int filaActual = juego.getIntentos();
 		EstadoLetra[] resultado = juego.intentar(palabra);
-		int intentos = juego.getIntentos();
-		panelCentro.mostrarResultado(palabra, resultado,intentos);
-		juego.sumarIntento();
+		panelCentro.mostrarResultado(palabra, resultado,filaActual);
 
 		if(juego.victoria(palabra)) {
 			JOptionPane.showMessageDialog(this, "¡Ganaste!" + 
 					"\nTiempo: " + panelSuperior.getTiempo());
 			panelSuperior.pararCronometro();
-			return;
+			System.exit(0);
 		}
 		
+		
 		if(juego.derrota()) {
-			JOptionPane.showMessageDialog(this, "Perdiste, la palabra era: " + juego.getPalabraSecreta() + 
+			JOptionPane.showMessageDialog(this, 
+					"Perdiste, la palabra era: " +juego.getPalabraSecreta() + 
 					"\nTiempo: " + panelSuperior.getTiempo());
 			panelSuperior.pararCronometro();
-			
+			 System.exit(0);
 		}
 		
 	}
@@ -69,6 +70,11 @@ public class Tablero extends JPanel implements EscuchadorJuego {
 	@Override
 	public int darIntentosMaximos() {
 		return juego.INTENTOS_MAXIMOS();
+	}
+
+	@Override
+	public int darLongitudPalabra() {
+		return juego.getPalabraSecreta().length();
 	}
 
 }

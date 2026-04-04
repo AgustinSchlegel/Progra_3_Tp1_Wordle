@@ -41,7 +41,7 @@ public class PanelBajo extends Panel{
 		//Verifica que la palabra sea de 5 letras
 		botonAceptar.addActionListener(e -> {
 			String palabra = campoTexto.getText().toUpperCase();
-			if (palabra.length() == escuchador.darIntentosMaximos()) {
+			if (palabra.length() == escuchador.darLongitudPalabra()) {
 				 if (escuchador != null) {
 					 escuchador.procesarPalabra(palabra);
 	                }

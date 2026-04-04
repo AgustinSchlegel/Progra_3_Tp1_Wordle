@@ -11,8 +11,9 @@ public class SistemaLogica {
 	}
 	
 	public EstadoLetra[] intentar(String palabra) {
-        ComparadorPalabras comp = new ComparadorPalabras(palabra, palabraSecreta);
-        return comp.comparar();
+		this.intentos++;
+        ComparadorPalabras comp = new ComparadorPalabras(palabraSecreta);
+        return comp.comparar(palabra);
     }
 
     public boolean victoria(String palabra) {
@@ -31,9 +32,11 @@ public class SistemaLogica {
 	    return this.intentos; 
 	}
 
-	public void sumarIntento() {
+	/*
+	public void sumarIntento() {			//Mala arquitectura
 		this.intentos++;		
 	}
+	*/
 	
 	public int INTENTOS_MAXIMOS() {
 		return this.max_intentos;
