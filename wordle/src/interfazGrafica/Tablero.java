@@ -4,11 +4,15 @@ import javax.swing.*;
 import sistema.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 // 1. Ahora la clase HEREDA de JPanel
 public class Tablero extends JPanel implements EscuchadorJuego {
     private String idioma;
 	private SistemaLogica juego;
+	private int pistas = 0;
+	private final int max_pistas = 2;
+	private boolean[] reveladas = new boolean[5];
 	PanelSuperior panelSuperior;
 	PanelCentro panelCentro;
 	PanelBajo panelBajo;
@@ -42,6 +46,9 @@ public class Tablero extends JPanel implements EscuchadorJuego {
         
         //Iniciamos el cronómetro
         panelSuperior.iniciarCronometro();
+        
+        //set tablero para las pistas
+        panelSuperior.setTablero(this);
     }
 
 	public void procesarPalabra(String palabra) {
@@ -65,6 +72,36 @@ public class Tablero extends JPanel implements EscuchadorJuego {
 			 System.exit(0);
 		}
 		
+	}
+	
+	public void darPista() {
+		
+	    if (pistas >= max_pistas) {
+	        JOptionPane.showMessageDialog(this, "no quedan mas pistas");
+	        return;
+	    }
+	    
+	    String palabra = juego.getPalabraSecreta();
+	    ArrayList<Integer> disponibles = new ArrayList<>();
+	    int fila = juego.getIntentos();
+
+	    for (int i = 0; i < palabra.length(); i++) {
+	        if (!reveladas[i] && panelCentro.estaVacia(fila, i) && !panelCentro.esVerde(i)) {
+	            disponibles.add(i);
+	        }
+	    }
+
+	    if (disponibles.isEmpty()) {
+	    	return;
+	    }
+ 
+	    int random = (int) (Math.random() * disponibles.size());
+	    int columna = disponibles.get(random);
+	    reveladas[columna] = true;
+
+	    char letra = Character.toUpperCase(palabra.charAt(columna));
+	    panelCentro.revelarLetra(fila, columna, letra);
+	    pistas++;
 	}
 	
 	@Override

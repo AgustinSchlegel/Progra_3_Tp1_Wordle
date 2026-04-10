@@ -42,12 +42,31 @@ public class PanelCentro extends Panel {
 		int limite = Math.min(palabra.length(), 5);
 		
         for (int i = 0; i < limite; i++) {
-            grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
+        	if (grilla[filaActual][i].getText().isEmpty()) {
+        	    grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
+        	}
         }
 
         filaActual++;
     }
 	
+	public void revelarLetra(int fila, int columna, char letra) {
+	    if (fila >= 5) {
+	    	return;
+	    }
+	    grilla[fila][columna].cargarLetra(letra, EstadoLetra.VERDE);
+	}
 	
+	public boolean estaVacia(int fila, int columna) {
+	    return grilla[fila][columna].getText().isEmpty();
+	}
 	
+	public boolean esVerde(int columna) {
+	    for (int i = 0; i < grilla.length; i++) {
+	        if (grilla[i][columna].getBackground().equals(new Color(83, 141, 78))) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 }
