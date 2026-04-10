@@ -8,8 +8,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class PanelSuperior extends Panel{
+public class PanelSuperior extends JPanel{
 	
 	private JLabel labelTiempoTexto;
     private JLabel labelTiempo;

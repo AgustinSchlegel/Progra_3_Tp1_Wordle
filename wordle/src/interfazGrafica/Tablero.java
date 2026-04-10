@@ -6,18 +6,19 @@ import sistema.*;
 import java.awt.*;
 
 // 1. Ahora la clase HEREDA de JPanel
-public class Tablero extends JPanel implements EscuchadorJuego {
-    private String idioma;
+public class Tablero extends JPanel{
+	private String idioma;
 	private SistemaLogica juego;
-	PanelSuperior panelSuperior;
-	PanelCentro panelCentro;
-	PanelBajo panelBajo;
+	private PanelSuperior panelSuperior;
+    private PanelCentro panelCentro;
+    private PanelBajo panelBajo;
+    private Panel_Menu ventana;
 
-    public Tablero(String idiomaRecibido) {
-        this.idioma = idiomaRecibido; 
+    public Tablero(String idiomaRecibido,Panel_Menu ventana) {
+    	this.idioma =idiomaRecibido;
+    	this.ventana=ventana;
         setLayout(new BorderLayout());
         generarEntorno();
-        panelBajo.setReceptor(this);
     }
     
     public void procesarEntrada(String palabra) {
@@ -27,13 +28,13 @@ public class Tablero extends JPanel implements EscuchadorJuego {
     public void generarEntorno() {
     	panelSuperior= new PanelSuperior(); 
     	panelCentro= new PanelCentro(); 
-        panelBajo = new PanelBajo(); 
+    	panelBajo = new PanelBajo(); 
         
 
         String palabra = palabras_jugables.seleccionarPalabra(this.idioma);
         
         this.juego = new SistemaLogica(palabra);
-        panelBajo.setReceptor(this);
+        panelBajo.setTablero(this);
         
         //Agregamos directamente al panel (this)
         add(panelSuperior, BorderLayout.NORTH); 
@@ -53,7 +54,7 @@ public class Tablero extends JPanel implements EscuchadorJuego {
 			JOptionPane.showMessageDialog(this, "¡Ganaste!" + 
 					"\nTiempo: " + panelSuperior.getTiempo());
 			panelSuperior.pararCronometro();
-			System.exit(0);
+			finalizarPartida();
 		}
 		
 		
@@ -62,17 +63,29 @@ public class Tablero extends JPanel implements EscuchadorJuego {
 					"Perdiste, la palabra era: " +juego.getPalabraSecreta() + 
 					"\nTiempo: " + panelSuperior.getTiempo());
 			panelSuperior.pararCronometro();
-			 System.exit(0);
+			 finalizarPartida();
 		}
 		
 	}
 	
-	@Override
+	private void finalizarPartida() {
+		int opcion = JOptionPane.showConfirmDialog(
+			    this, 
+			    "¿Volver al menú?", 
+			    "Fin de la partida", 
+			    JOptionPane.YES_NO_OPTION
+			);        
+		if (opcion == JOptionPane.YES_OPTION) {
+            ventana.mostrarMenuPrincipal();
+        }else{
+        	System.exit(0);
+        }
+    }
+	
 	public int darIntentosMaximos() {
 		return juego.INTENTOS_MAXIMOS();
 	}
 
-	@Override
 	public int darLongitudPalabra() {
 		return juego.getPalabraSecreta().length();
 	}

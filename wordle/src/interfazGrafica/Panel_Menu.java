@@ -1,6 +1,8 @@
 package interfazGrafica;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,80 +16,80 @@ import javax.swing.SwingUtilities;
 import sistema.SistemaLogica;
 import sistema.palabras_jugables;
 
-public class Panel_Menu extends Panel {
-	String idiomaSeleccionado = "Español"; //Lo dejamos asi para que siempre halla un idioma por defecto
-	private EscuchadorMenu escuchador;
+public class Panel_Menu extends JFrame {
+    private String idiomaSeleccionado = "Español";
 
-	public Panel_Menu() {
-		
-	    setLayout(new GridBagLayout()); 
-	    GridBagConstraints configuracion = new GridBagConstraints();
-	    configuracion.insets = new Insets(10, 10, 10, 10);
-	    configuracion.fill = GridBagConstraints.HORIZONTAL;
-	    
-	//Implementacion de Botones
-	    //Iniciar
-	    configuracion.gridy = 0; 												
-	    JButton iniciarPartida = crearBotónEstandar("Iniciar Partida");
-	    iniciarPartida.addActionListener(e -> {
-	        if (escuchador != null) {
-	            escuchador.IniciarPartida(idiomaSeleccionado);
-	        }
-	    });
-	    add(iniciarPartida, configuracion);
-	    
-	    //Elegir idioma
-	    configuracion.gridy = 1; 
-	    JButton idioma = crearBotónEstandar("Idioma");
-	    idioma.addActionListener(e -> {
-	        String[] opciones = {"Español", "English", "Português","Deutsch","Avañe'ẽ"};
-	        int seleccion = JOptionPane.showOptionDialog(
-	                this,
-	                "Seleccione el idioma de juego:",
-	                "Configuración",
-	                JOptionPane.DEFAULT_OPTION,
-	                JOptionPane.QUESTION_MESSAGE,
-	                null, opciones, opciones[0]);
+    public Panel_Menu() {
+        // Configuraciones básicas de la ventana (solo una vez)
+        setTitle("Wordle UNGS");
+        setSize(400, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-	        if (seleccion != -1) {
-	            idiomaSeleccionado = opciones[seleccion];
-	        }
-	    });
-	    add(idioma, configuracion);
-	    
-	    //Ranking
-	    configuracion.gridy = 2;
-	    JButton ranking = crearBotónEstandar("Ranking");
-	    ranking.addActionListener(e -> {
-	        if (escuchador != null) {
-	            escuchador.MostrarRanking();
-	        }
-	    });
-	    add(ranking, configuracion);
-
-	    //Salir
-	    configuracion.gridy = 3;
-	    
-	    JButton salir = crearBotónEstandar("Salir");
-	    salir.addActionListener(e -> {
-	        if (escuchador != null) {
-	            escuchador.Salir();
-	        }
-	    });
-	    add(salir, configuracion);	    
-	}
-	
-	public String getIdiomaSeleccionado() {
-		return idiomaSeleccionado;
-	}
-	
-	public void setEscuchador(EscuchadorMenu e) {
-        this.escuchador = e;
+        // Al arrancar, mostramos el menú
+        mostrarMenuPrincipal();
     }
-	
-	private JButton crearBotónEstandar(String texto) {
-	    JButton boton = new JButton(texto);
-	    boton.setPreferredSize(new Dimension(200, 50));
-	    return boton;
-	}	
+
+    // Este método lo llamás desde afuera (Tablero) o desde el constructor
+    public void mostrarMenuPrincipal() {
+        this.setContentPane(generarPanelMenu());
+        this.revalidate();
+        this.repaint();
+    }
+
+    // ACÁ está el método que preguntabas: es el que arma el "dibujo" del menú
+    private JPanel generarPanelMenu() {
+        JPanel panelContenedor = new JPanel(new GridBagLayout());
+        panelContenedor.setBackground(new Color(18, 18, 18));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Botón Iniciar
+        gbc.gridy = 0;
+        JButton iniciar = crearBotónEstandar("Iniciar Partida");
+        iniciar.addActionListener(e -> iniciarJuego());
+        panelContenedor.add(iniciar, gbc);
+
+        // Botón Idioma
+        gbc.gridy = 1;
+        JButton idioma = crearBotónEstandar("Idioma");
+        idioma.addActionListener(e -> configurarIdioma());
+        panelContenedor.add(idioma, gbc);
+
+        // Botón Salir
+        gbc.gridy = 2;
+        JButton salir = crearBotónEstandar("Salir");
+        salir.addActionListener(e -> System.exit(0));
+        panelContenedor.add(salir, gbc);
+
+        return panelContenedor;
+    }
+
+    private void iniciarJuego() {
+        Tablero tablero = new Tablero(idiomaSeleccionado, this);
+        this.setContentPane(tablero);
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void configurarIdioma() {
+        String[] opciones = {"Español", "English", "Português","Deutsch","Avañe'ẽ"};
+        int seleccion = JOptionPane.showOptionDialog(this, "Seleccione el idioma:", 
+                "Configuración", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                null, opciones, opciones[0]);
+        if (seleccion != -1) idiomaSeleccionado = opciones[seleccion];
+    }
+    
+    private JButton crearBotónEstandar(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setPreferredSize(new Dimension(200, 50));
+        boton.setBackground(new Color(58, 58, 60));
+        boton.setForeground(Color.WHITE);
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setFocusPainted(false);
+        boton.setBorderPainted(false);
+        return boton;
+    }
 }

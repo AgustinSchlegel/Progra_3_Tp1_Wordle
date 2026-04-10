@@ -7,7 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import sistema.EstadoLetra;
 
-public class PanelCentro extends Panel {
+public class PanelCentro extends JPanel {
 	
 	private bloque_Letra[][] grilla;
     
