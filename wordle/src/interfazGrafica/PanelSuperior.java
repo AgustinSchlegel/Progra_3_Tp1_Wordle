@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,6 +17,7 @@ public class PanelSuperior extends JPanel{
     private JLabel labelTiempo;
     private Timer cronometro;
     private int tiempoTranscurrido;
+    private Tablero tablero;
     
 	public static void main(String[] args) {
 		new PanelSuperior();
@@ -33,6 +35,17 @@ public class PanelSuperior extends JPanel{
 		labelTiempo.setFont(new Font("Arial", Font.BOLD, 14));
 		labelTiempo.setForeground(Color.GREEN);
 		add(labelTiempo);
+		
+		JButton botonPista = new JButton("Pista");
+		botonPista.setBackground(new Color(181, 159, 59));
+		botonPista.setForeground(Color.WHITE);
+		botonPista.addActionListener(e -> {
+		    if (tablero != null) {
+		        tablero.darPista();
+		    }
+		});
+
+		add(botonPista);
 		
 	}
 	
@@ -71,5 +84,9 @@ public class PanelSuperior extends JPanel{
 		int minutos = tiempoTranscurrido / 60;
 	    int segundos = tiempoTranscurrido % 60;
 	    return String.format("%02d:%02d", minutos, segundos);
+	}
+	
+	public void setTablero(Tablero tablero) {
+	    this.tablero = tablero;
 	}
 }

@@ -13,6 +13,9 @@ public class Tablero extends JPanel{
     private PanelCentro panelCentro;
     private PanelBajo panelBajo;
     private Panel_Menu ventana;
+    private int pistas = 0;
+	private final int max_pistas = 2;
+	private boolean[] reveladas = new boolean[5];
 
     public Tablero(String idiomaRecibido,Panel_Menu ventana) {
     	this.idioma =idiomaRecibido;
@@ -43,6 +46,9 @@ public class Tablero extends JPanel{
         
         //Iniciamos el cronómetro
         panelSuperior.iniciarCronometro();
+        
+        //set tablero para las pistas
+        panelSuperior.setTablero(this);
     }
 
 	public void procesarPalabra(String palabra) {
@@ -81,6 +87,35 @@ public class Tablero extends JPanel{
         	System.exit(0);
         }
     }
+	public void darPista() {
+		
+	    if (pistas >= max_pistas) {
+	        JOptionPane.showMessageDialog(this, "no quedan mas pistas");
+	        return;
+	    }
+	    
+	    String palabra = juego.getPalabraSecreta();
+	    ArrayList<Integer> disponibles = new ArrayList<>();
+	    int fila = juego.getIntentos();
+
+	    for (int i = 0; i < palabra.length(); i++) {
+	        if (!reveladas[i] && panelCentro.estaVacia(fila, i) && !panelCentro.esVerde(i)) {
+	            disponibles.add(i);
+	        }
+	    }
+
+	    if (disponibles.isEmpty()) {
+	    	return;
+	    }
+ 
+	    int random = (int) (Math.random() * disponibles.size());
+	    int columna = disponibles.get(random);
+	    reveladas[columna] = true;
+
+	    char letra = Character.toUpperCase(palabra.charAt(columna));
+	    panelCentro.revelarLetra(fila, columna, letra);
+	    pistas++;
+	}
 	
 	public int darIntentosMaximos() {
 		return juego.INTENTOS_MAXIMOS();
