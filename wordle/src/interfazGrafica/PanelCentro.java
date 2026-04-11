@@ -7,7 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import sistema.EstadoLetra;
 
-public class PanelCentro extends Panel {
+public class PanelCentro extends JPanel {
 	
 	private bloque_Letra[][] grilla;
     
@@ -44,7 +44,7 @@ public class PanelCentro extends Panel {
         for (int i = 0; i < limite; i++) {
         	if (grilla[filaActual][i].getText().isEmpty()) {
         	    grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
-        	}
+        	}        
         }
 
         filaActual++;
@@ -56,11 +56,11 @@ public class PanelCentro extends Panel {
 	    }
 	    grilla[fila][columna].cargarLetra(letra, EstadoLetra.VERDE);
 	}
-	
+
 	public boolean estaVacia(int fila, int columna) {
 	    return grilla[fila][columna].getText().isEmpty();
 	}
-	
+
 	public boolean esVerde(int columna) {
 	    for (int i = 0; i < grilla.length; i++) {
 	        if (grilla[i][columna].getBackground().equals(new Color(83, 141, 78))) {
@@ -69,4 +69,6 @@ public class PanelCentro extends Panel {
 	    }
 	    return false;
 	}
+	
+	
 }

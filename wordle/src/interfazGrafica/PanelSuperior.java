@@ -9,8 +9,9 @@ import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class PanelSuperior extends Panel{
+public class PanelSuperior extends JPanel{
 	
 	private JLabel labelTiempoTexto;
     private JLabel labelTiempo;
@@ -45,6 +46,7 @@ public class PanelSuperior extends Panel{
 		});
 
 		add(botonPista);
+		
 	}
 	
 	public void iniciarCronometro() {
