@@ -16,10 +16,10 @@ import javax.swing.SwingUtilities;
 import sistema.SistemaLogica;
 import sistema.palabras_jugables;
 
-public class Panel_Menu extends JFrame {
+public class Menu extends JFrame {
     private String idiomaSeleccionado = "Español";
 
-    public Panel_Menu() {
+    public Menu() {
         // Configuraciones básicas de la ventana (solo una vez)
         setTitle("Wordle UNGS");
         setSize(400, 600);
@@ -49,19 +49,19 @@ public class Panel_Menu extends JFrame {
         // Botón Iniciar
         gbc.gridy = 0;
         JButton iniciar = crearBotónEstandar("Iniciar Partida");
-        iniciar.addActionListener(e -> iniciarJuego());
+        iniciar.addActionListener(escucharBoton -> iniciarJuego());
         panelContenedor.add(iniciar, gbc);
 
         // Botón Idioma
         gbc.gridy = 1;
         JButton idioma = crearBotónEstandar("Idioma");
-        idioma.addActionListener(e -> configurarIdioma());
+        idioma.addActionListener(escucharBoton -> configurarIdioma());
         panelContenedor.add(idioma, gbc);
 
         // Botón Salir
         gbc.gridy = 2;
         JButton salir = crearBotónEstandar("Salir");
-        salir.addActionListener(e -> System.exit(0));
+        salir.addActionListener(escucharBoton -> System.exit(0));
         panelContenedor.add(salir, gbc);
 
         return panelContenedor;

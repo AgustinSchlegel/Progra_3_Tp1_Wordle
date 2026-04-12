@@ -7,13 +7,13 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 
-public class PanelBajo extends JPanel{
+public class EntradaDatos extends JPanel{
 	private Tablero tablero;
 	private JTextField campoTexto;
 	private JButton botonAceptar;
 
 	
-	public PanelBajo() {
+	public EntradaDatos() {
 	    Color colorSeccionBaja = new Color(37, 37, 37);
 	    this.setPreferredSize(new Dimension(500, 100));
 		this.setLayout(new BorderLayout());

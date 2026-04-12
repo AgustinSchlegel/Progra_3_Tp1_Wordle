@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanelSuperior extends JPanel{
+public class ComplementoVisual extends JPanel{
 	
 	private JLabel labelTiempoTexto;
     private JLabel labelTiempo;
@@ -19,7 +19,7 @@ public class PanelSuperior extends JPanel{
     private int tiempoTranscurrido;
     private Tablero tablero;
 	
-	public PanelSuperior() {
+	public ComplementoVisual() {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		labelTiempoTexto = new JLabel("Tiempo:");
