@@ -8,17 +8,25 @@ import java.util.ArrayList;
 
 // 1. Ahora la clase HEREDA de JPanel
 public class Tablero extends JPanel{
-	private String idioma;
+	//Frame
+    private Menu ventana;
+    
+    //
 	private SistemaLogica juego;
-	private PanelSuperior panelSuperior;
-    private PanelCentro panelCentro;
-    private PanelBajo panelBajo;
-    private Panel_Menu ventana;
+	
+	//Paneles
+	private ComplementoVisual complementoVisual;
+    private Cuadricula cuadricula;
+    private EntradaDatos entradaDatos;
+    
+    
+    
     private int pistas = 0;
 	private final int max_pistas = 2;
 	private boolean[] reveladas = new boolean[5];
+	private String idioma;
 
-    public Tablero(String idiomaRecibido,Panel_Menu ventana) {
+    public Tablero(String idiomaRecibido,Menu ventana) {
     	this.idioma =idiomaRecibido;
     	this.ventana=ventana;
         setLayout(new BorderLayout());
@@ -30,38 +38,37 @@ public class Tablero extends JPanel{
     }
     
     public void generarEntorno() {
-    	panelSuperior= new PanelSuperior(); 
-    	panelCentro= new PanelCentro(); 
-    	panelBajo = new PanelBajo(); 
+    	complementoVisual= new ComplementoVisual(); 
+    	cuadricula= new Cuadricula(); 
+    	entradaDatos = new EntradaDatos(); 
         
 
         String palabra = palabras_jugables.seleccionarPalabra(this.idioma);
         
         this.juego = new SistemaLogica(palabra);
-        panelBajo.setTablero(this);
+        entradaDatos.setTablero(this);
         
         //Agregamos directamente al panel (this)
-        add(panelSuperior, BorderLayout.NORTH); 
-        add(panelCentro, BorderLayout.CENTER); 
-        add(panelBajo, BorderLayout.SOUTH);
+        add(complementoVisual, BorderLayout.NORTH); 
+        add(cuadricula, BorderLayout.CENTER); 
+        add(entradaDatos, BorderLayout.SOUTH);
         
         //Iniciamos el cronómetro
-        panelSuperior.iniciarCronometro();
+        complementoVisual.iniciarCronometro();
         
         //set tablero para las pistas
-        panelSuperior.setTablero(this);
+        complementoVisual.setTablero(this);
     }
 
 	public void procesarPalabra(String palabra) {
 		int filaActual = juego.getIntentoActual();
 		EstadoLetra[] resultado = juego.intentar(palabra);
-		panelCentro.mostrarResultado(palabra, resultado,filaActual);
+		cuadricula.mostrarResultado(palabra, resultado,filaActual);
 
 		if(juego.victoria(palabra)) {
 			JOptionPane.showMessageDialog(this, "¡Ganaste!" + 
-					"\nTiempo: " + panelSuperior.getTiempo());
-			//TODO aca pediria el nombre del jugador para subirlo al ranking
-			panelSuperior.pararCronometro();
+					"\nTiempo: " + complementoVisual.getTiempo());
+			complementoVisual.pararCronometro();
 			finalizarPartida();
 		}
 		
@@ -69,8 +76,8 @@ public class Tablero extends JPanel{
 		if(juego.derrota()) {
 			JOptionPane.showMessageDialog(this, 
 					"Perdiste, la palabra era: " +juego.getPalabraSecreta() + 
-					"\nTiempo: " + panelSuperior.getTiempo());
-			panelSuperior.pararCronometro();
+					"\nTiempo: " + complementoVisual.getTiempo());
+			complementoVisual.pararCronometro();
 			 finalizarPartida();
 		}
 		
@@ -78,8 +85,8 @@ public class Tablero extends JPanel{
 	
 	private void finalizarPartida() {
 		int opcion = JOptionPane.showConfirmDialog(
-			    this,
-			    "¿Volver al menú? \n Ranking:" + juego.getRanking(),
+			    this, 
+			    "¿Volver al menú?", 
 			    "Fin de la partida", 
 			    JOptionPane.YES_NO_OPTION
 			);        
@@ -101,7 +108,7 @@ public class Tablero extends JPanel{
 	    int fila = juego.getIntentoActual();
 
 	    for (int i = 0; i < palabra.length(); i++) {
-	        if (!reveladas[i] && panelCentro.estaVacia(fila, i) && !panelCentro.esVerde(i)) {
+	        if (!reveladas[i] && cuadricula.estaVacia(fila, i) && !cuadricula.esVerde(i)) {
 	            disponibles.add(i);
 	        }
 	    }
@@ -115,7 +122,7 @@ public class Tablero extends JPanel{
 	    reveladas[columna] = true;
 
 	    char letra = Character.toUpperCase(palabra.charAt(columna));
-	    panelCentro.revelarLetra(fila, columna, letra);
+	    cuadricula.revelarLetra(fila, columna, letra);
 	    pistas++;
 	}
 	

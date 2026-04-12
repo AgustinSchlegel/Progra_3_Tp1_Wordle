@@ -7,12 +7,12 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import sistema.EstadoLetra;
 
-public class PanelCentro extends JPanel {
+public class Cuadricula extends JPanel {
 	
 	private bloque_Letra[][] grilla;
 
     
-	public PanelCentro() {
+	public Cuadricula() {
 	    Color colorCuadrilla = new Color(30, 30, 30);
 		JPanel centrado = new JPanel();		
 		
