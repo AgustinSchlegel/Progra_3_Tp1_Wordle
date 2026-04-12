@@ -60,6 +60,7 @@ public class Tablero extends JPanel{
 		if(juego.victoria(palabra)) {
 			JOptionPane.showMessageDialog(this, "¡Ganaste!" + 
 					"\nTiempo: " + panelSuperior.getTiempo());
+			//TODO aca pediria el nombre del jugador para subirlo al ranking
 			panelSuperior.pararCronometro();
 			finalizarPartida();
 		}
@@ -77,8 +78,8 @@ public class Tablero extends JPanel{
 	
 	private void finalizarPartida() {
 		int opcion = JOptionPane.showConfirmDialog(
-			    this, 
-			    "¿Volver al menú?", 
+			    this,
+			    "¿Volver al menú? \n Ranking:" + juego.getRanking(),
 			    "Fin de la partida", 
 			    JOptionPane.YES_NO_OPTION
 			);        

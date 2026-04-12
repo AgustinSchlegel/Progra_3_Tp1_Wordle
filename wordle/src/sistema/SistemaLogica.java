@@ -1,15 +1,37 @@
 package sistema;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SistemaLogica {
 	private String palabraSecreta;
 	private int intentoActual;
 	private final int max_intentos = 6;
+	private String ranking;
 	
 	public SistemaLogica(String palabraSecreta) {
 		this.palabraSecreta = palabraSecreta;
 		this.intentoActual = 0;
 	}
-	
+
+	public String getRanking(){
+		return ranking;
+	}
+
+	public void cargarRanking(String nuevoRanking){
+		if (ranking==null){
+			this.ranking=nuevoRanking;
+		}
+		List<String> lineas = new ArrayList<>(Arrays.asList(ranking.split("\n")));
+
+		lineas.add(nuevoRanking);
+
+		if(lineas.size() > 6) lineas.remove(0);
+
+		this.ranking = String.join("\n", lineas);
+	}
+
 	public EstadoLetra[] intentar(String palabra) {
 		this.intentoActual++;
         ComparadorPalabras comp = new ComparadorPalabras(palabraSecreta);
