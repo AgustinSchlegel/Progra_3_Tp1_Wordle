@@ -10,10 +10,7 @@ import javax.swing.SwingConstants;
 import sistema.EstadoLetra;
 
 public class bloque_Letra extends JLabel{
-	public static void main(String[] args) {
-		new bloque_Letra();
-	}
-	
+
 	public bloque_Letra() {
 		Font miFuente = new Font("Arial", Font.BOLD, 20);
 		this.setPreferredSize(new Dimension(50, 50));

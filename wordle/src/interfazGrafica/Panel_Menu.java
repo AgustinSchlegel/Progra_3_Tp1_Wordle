@@ -30,7 +30,7 @@ public class Panel_Menu extends JFrame {
         mostrarMenuPrincipal();
     }
 
-    // Este método lo llamás desde afuera (Tablero) o desde el constructor
+    // Este metodo lo llamas desde afuera (Tablero) o desde el constructor
     public void mostrarMenuPrincipal() {
         this.setContentPane(generarPanelMenu());
         this.revalidate();

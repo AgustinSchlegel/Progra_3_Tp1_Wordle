@@ -18,10 +18,6 @@ public class PanelSuperior extends JPanel{
     private Timer cronometro;
     private int tiempoTranscurrido;
     private Tablero tablero;
-    
-	public static void main(String[] args) {
-		new PanelSuperior();
-	}
 	
 	public PanelSuperior() {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));

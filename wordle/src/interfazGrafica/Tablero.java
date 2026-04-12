@@ -53,7 +53,7 @@ public class Tablero extends JPanel{
     }
 
 	public void procesarPalabra(String palabra) {
-		int filaActual = juego.getIntentos();
+		int filaActual = juego.getIntentoActual();
 		EstadoLetra[] resultado = juego.intentar(palabra);
 		panelCentro.mostrarResultado(palabra, resultado,filaActual);
 
@@ -97,7 +97,7 @@ public class Tablero extends JPanel{
 	    
 	    String palabra = juego.getPalabraSecreta();
 	    ArrayList<Integer> disponibles = new ArrayList<>();
-	    int fila = juego.getIntentos();
+	    int fila = juego.getIntentoActual();
 
 	    for (int i = 0; i < palabra.length(); i++) {
 	        if (!reveladas[i] && panelCentro.estaVacia(fila, i) && !panelCentro.esVerde(i)) {

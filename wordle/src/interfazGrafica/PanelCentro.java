@@ -10,31 +10,28 @@ import sistema.EstadoLetra;
 public class PanelCentro extends JPanel {
 	
 	private bloque_Letra[][] grilla;
-    
-    public static void main(String[] args) {
-		new PanelCentro();
-	}
+
     
 	public PanelCentro() {
 	    Color colorCuadrilla = new Color(30, 30, 30);
 		JPanel centrado = new JPanel();		
 		
 		//le da tamaño y margen de acomodo a los bloques generados por el metodo generarGrilla
-        centrado.setLayout(new GridLayout(0, 5, 2, 2));		
+        centrado.setLayout(new GridLayout(0, 5, 2, 2));
         centrado.setPreferredSize(new Dimension(400, 400));
         centrado.setBackground(colorCuadrilla);
         
         this.add(centrado);
-        grilla = new bloque_Letra[5][5];
+        grilla = new bloque_Letra[6][5];
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
                 bloque_Letra bloque = new bloque_Letra();
                 grilla[i][j] = bloque;
                 centrado.add(bloque);
             }
         }
-	} 
+	}
 	
 	public void mostrarResultado(String palabra, EstadoLetra[] estados,int filaActual) {
 		if (filaActual >= 6) return;

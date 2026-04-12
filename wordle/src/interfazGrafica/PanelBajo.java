@@ -11,9 +11,7 @@ public class PanelBajo extends JPanel{
 	private Tablero tablero;
 	private JTextField campoTexto;
 	private JButton botonAceptar;
-	public static void main(String[] args) {
-		new PanelBajo();
-	}
+
 	
 	public PanelBajo() {
 	    Color colorSeccionBaja = new Color(37, 37, 37);
