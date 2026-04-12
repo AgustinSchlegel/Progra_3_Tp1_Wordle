@@ -4,6 +4,7 @@ import javax.swing.*;
 import sistema.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 // 1. Ahora la clase HEREDA de JPanel
 public class Tablero extends JPanel{
