@@ -42,7 +42,6 @@ public class Cuadricula extends JPanel {
         	    grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
         	}        
         }
-        filaActual++;
     }
 	
 	public void revelarLetra(int fila, int columna, char letra) {
