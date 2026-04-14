@@ -30,7 +30,8 @@ public class Tablero extends JPanel{
     public Tablero(String idiomaRecibido,Menu ventana) {
     	this.idioma =idiomaRecibido;
     	this.ventana=ventana;
-        setLayout(new BorderLayout());
+		setBackground(new Color(24, 24, 27));
+        setLayout(new BorderLayout(0, 0));
         generarEntorno();
     }
     
@@ -146,4 +147,5 @@ public class Tablero extends JPanel{
 	public int darLongitudPalabra() {
 		return juego.getPalabraSecreta().length();
 	}
+	
 }

@@ -4,12 +4,16 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class ComplementoVisual extends JPanel{
 	
@@ -20,8 +24,9 @@ public class ComplementoVisual extends JPanel{
     private Tablero tablero;
 	
 	public ComplementoVisual() {
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+		setBorder(new EmptyBorder(10, 0, 10, 0)); 
+	    setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		setBackground(new Color(15, 15, 15));
 		labelTiempoTexto = new JLabel("Tiempo:");
 		labelTiempoTexto.setForeground(Color.WHITE);
 		add(labelTiempoTexto);
