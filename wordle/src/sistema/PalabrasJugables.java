@@ -2,7 +2,7 @@ package sistema;
 
 import java.util.HashMap;
 
-public class palabras_jugables {
+public class PalabrasJugables {
 	public static String[] palabras_español = {"veloz","libro","piano","arbol","playa","cielo","fuego","carta","monte","ahora"};
 	public static String[] palabras_guarani = {"kunuũ","pyagu","yvytu","yvoty","piraĩ","ka'ag","ysyry","tata ","ygate","mba'e"};
 	public static String[] palabras_ingles = {"light","water","sound","earth","bread","stone","cloud","river","flame","night"};

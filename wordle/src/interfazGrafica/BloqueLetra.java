@@ -9,9 +9,9 @@ import javax.swing.SwingConstants;
 
 import sistema.EstadoLetra;
 
-public class bloque_Letra extends JLabel{
+public class BloqueLetra extends JLabel{
 
-	public bloque_Letra() {
+	public BloqueLetra() {
 		Font miFuente = new Font("Arial", Font.BOLD, 20);
 		this.setPreferredSize(new Dimension(50, 50));
 		Color colorBloque = new Color(39, 39, 42);

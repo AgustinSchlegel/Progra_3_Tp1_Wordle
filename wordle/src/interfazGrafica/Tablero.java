@@ -42,7 +42,7 @@ public class Tablero extends JPanel{
     	cuadricula= new Cuadricula(); 
     	entradaDatos = new EntradaDatos(); 
         
-        String palabra = palabras_jugables.seleccionarPalabra(this.idioma);
+        String palabra = PalabrasJugables.seleccionarPalabra(this.idioma);
         
         this.juego = new SistemaLogica(palabra);
         entradaDatos.setTablero(this);

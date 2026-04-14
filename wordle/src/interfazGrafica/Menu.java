@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import sistema.SistemaLogica;
-import sistema.palabras_jugables;
+import sistema.PalabrasJugables;
 
 public class Menu extends JFrame {
 	

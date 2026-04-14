@@ -10,7 +10,7 @@ import sistema.EstadoLetra;
 
 public class Cuadricula extends JPanel {
 	
-	private bloque_Letra[][] grilla;
+	private BloqueLetra[][] grilla;
 
 	public Cuadricula() {
 	    Color colorCuadrilla = new Color(24, 24, 27);
@@ -21,11 +21,11 @@ public class Cuadricula extends JPanel {
         centrado.setBackground(colorCuadrilla);
         
         this.add(centrado);
-        grilla = new bloque_Letra[6][5];
+        grilla = new BloqueLetra[6][5];
 
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                bloque_Letra bloque = new bloque_Letra();
+                BloqueLetra bloque = new BloqueLetra();
                 grilla[i][j] = bloque;
                 centrado.add(bloque);
             }
