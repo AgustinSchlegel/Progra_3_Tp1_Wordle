@@ -22,6 +22,7 @@ public class Menu extends JFrame {
     public Menu() {
         // Configuraciones básicas de la ventana (solo una vez)
         setTitle("Wordle UNGS");
+        setResizable(false);
         setSize(400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

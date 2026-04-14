@@ -14,7 +14,7 @@ public class bloque_Letra extends JLabel{
 	public bloque_Letra() {
 		Font miFuente = new Font("Arial", Font.BOLD, 20);
 		this.setPreferredSize(new Dimension(50, 50));
-		Color colorBloque = new Color(0, 173, 181);
+		Color colorBloque = new Color(39, 39, 42);
 		setOpaque(true);
 		setBackground(colorBloque);
 		setFont(miFuente);

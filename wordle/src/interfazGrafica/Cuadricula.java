@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
+
 import sistema.EstadoLetra;
 
 public class Cuadricula extends JPanel {
@@ -13,7 +14,7 @@ public class Cuadricula extends JPanel {
 
     
 	public Cuadricula() {
-	    Color colorCuadrilla = new Color(30, 30, 30);
+	    Color colorCuadrilla = new Color(24, 24, 27);
 		JPanel centrado = new JPanel();		
 		
 		//le da tamaño y margen de acomodo a los bloques generados por el metodo generarGrilla
@@ -66,6 +67,4 @@ public class Cuadricula extends JPanel {
 	    }
 	    return false;
 	}
-	
-	
 }

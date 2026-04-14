@@ -4,6 +4,9 @@ import javax.swing.*;
 import sistema.*;
 
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 // 1. Ahora la clase HEREDA de JPanel
@@ -17,9 +20,7 @@ public class Tablero extends JPanel{
 	//Paneles
 	private ComplementoVisual complementoVisual;
     private Cuadricula cuadricula;
-    private EntradaDatos entradaDatos;
-    
-    
+    private EntradaDatos entradaDatos;    
     
     private int pistas = 0;
 	private final int max_pistas = 2;
@@ -29,7 +30,8 @@ public class Tablero extends JPanel{
     public Tablero(String idiomaRecibido,Menu ventana) {
     	this.idioma =idiomaRecibido;
     	this.ventana=ventana;
-        setLayout(new BorderLayout());
+		setBackground(new Color(24, 24, 27));
+        setLayout(new BorderLayout(0, 0));
         generarEntorno();
     }
     
@@ -66,10 +68,16 @@ public class Tablero extends JPanel{
 		cuadricula.mostrarResultado(palabra, resultado,filaActual);
 
 		if(juego.victoria(palabra)) {
-			JOptionPane.showMessageDialog(this, "¡Ganaste!" + 
-					"\nTiempo: " + complementoVisual.getTiempo());
-			complementoVisual.pararCronometro();
-			finalizarPartida();
+		    complementoVisual.pararCronometro();
+		    String tiempoFinal = complementoVisual.getTiempo();
+		    
+		    String nombreDelGanador = JOptionPane.showInputDialog(this, "¡Victoria! Ingresá tu nombre:");
+
+		    if(nombreDelGanador != null && !nombreDelGanador.trim().isEmpty()) {
+		        juego.cargarRanking(nombreDelGanador + " - " + tiempoFinal);
+		    }
+		    
+		    finalizarPartida();
 		}
 		
 		
@@ -84,18 +92,24 @@ public class Tablero extends JPanel{
 	}
 	
 	private void finalizarPartida() {
-		int opcion = JOptionPane.showConfirmDialog(
-			    this, 
-			    "¿Volver al menú?", 
-			    "Fin de la partida", 
-			    JOptionPane.YES_NO_OPTION
-			);        
-		if (opcion == JOptionPane.YES_OPTION) {
-            ventana.mostrarMenuPrincipal();
-        }else{
-        	System.exit(0);
-        }
-    }
+	    String mensajeFinal = "--- TOP RANKING ---\n" 
+	                        + juego.getRanking() 
+	                        + "\n\n¿Deseas volver al menú principal?";
+
+	    int opcion = JOptionPane.showConfirmDialog(
+	            this, 
+	            mensajeFinal, 
+	            "Fin de la partida",
+	            JOptionPane.YES_NO_OPTION,
+	            JOptionPane.INFORMATION_MESSAGE
+	        );        
+	    
+	    if (opcion == JOptionPane.YES_OPTION) {
+	        ventana.mostrarMenuPrincipal();
+	    } else {
+	        System.exit(0);
+	    }
+	}
 	public void darPista() {
 		
 	    if (pistas >= max_pistas) {
@@ -133,5 +147,5 @@ public class Tablero extends JPanel{
 	public int darLongitudPalabra() {
 		return juego.getPalabraSecreta().length();
 	}
-
+	
 }

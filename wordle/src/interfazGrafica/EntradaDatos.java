@@ -17,6 +17,8 @@ public class EntradaDatos extends JPanel{
 	    Color colorSeccionBaja = new Color(37, 37, 37);
 	    this.setPreferredSize(new Dimension(500, 100));
 		this.setLayout(new BorderLayout());
+		setBackground(new Color(15, 15, 15));
+
 
 		generarSeccionBaja(this,colorSeccionBaja);
 	}
@@ -24,18 +26,30 @@ public class EntradaDatos extends JPanel{
 	
 	//no se como acomodar el de ingresar palabra y el aceptar sin acomodarlos en el metodo directamente. Si pudiera lo haria
 	private void generarSeccionBaja(JPanel panelBajo,Color color ) {
-		//El cuadro donde el usuario escribira el texto y el formato
+		
+		//El input para el usuario
 		campoTexto = new JTextField();
 		campoTexto.setFont(new Font("Arial", Font.BOLD, 20));
 		campoTexto.setHorizontalAlignment(JTextField.CENTER);
 		campoTexto.setPreferredSize(new Dimension(250, 50));		
-
-		//Boton para enviar y verificar la palabra
+		campoTexto.setBackground(new Color(30, 30, 30)); // 
+		campoTexto.setForeground(new Color(83, 141, 78)); 
+		campoTexto.setCaretColor(Color.WHITE); 														
+		campoTexto.setBorder(BorderFactory.createLineBorder(new Color(58, 58, 60), 2)); 			
+		
+		//Boton de aceptar para la palabra(cumple una funcion mas que nada estetica al ya disponer del keyListener atento al ENTER)
 		botonAceptar = new JButton("ENVIAR");
 		botonAceptar.setPreferredSize(new Dimension(120, 50));
 		botonAceptar.setBackground(new Color(83, 141, 78));
 		botonAceptar.setForeground(Color.WHITE);
 		botonAceptar.setFocusPainted(false);
+		botonAceptar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		botonAceptar.setFont(new Font("Arial", Font.BOLD, 14));
+		
+		
+
+
+		// Estilo para el botón enviar
 
 		//Verifica que la palabra sea de 5 letras
 		botonAceptar.addActionListener(e -> {

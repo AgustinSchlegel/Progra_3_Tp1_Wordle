@@ -1,8 +1,15 @@
 package sistema;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class SistemaLogica {
 	private String palabraSecreta;
@@ -13,25 +20,62 @@ public class SistemaLogica {
 	public SistemaLogica(String palabraSecreta) {
 		this.palabraSecreta = palabraSecreta;
 		this.intentoActual = 0;
+		this.ranking = cargarRankingDesdeArchivo();
 	}
 
 	public String getRanking(){
 		return ranking;
 	}
 
-	public void cargarRanking(String nuevoRanking){
-		if (ranking==null){
-			this.ranking=nuevoRanking;
-		}
-		List<String> lineas = new ArrayList<>(Arrays.asList(ranking.split("\n")));
+	public void cargarRanking(String nuevoRanking) {
+        if (ranking == null) ranking = "";
+        
+        List<String> lineas = new ArrayList<>();
+        if (!ranking.isEmpty()) {
+            lineas.addAll(Arrays.asList(ranking.split("\n")));
+        }
 
-		lineas.add(nuevoRanking);
+        lineas.add(nuevoRanking);
+        if (lineas.size() > 6) lineas.remove(0);
 
-		if(lineas.size() > 6) lineas.remove(0);
+        this.ranking = String.join("\n", lineas);
+        
+        guardarRankingEnArchivo(this.ranking);
+    }
 
-		this.ranking = String.join("\n", lineas);
+	private void guardarRankingEnArchivo(String datosDeRanking) {
+	    try {
+	        // Usamos un nombre que indique que es el escritor del archivo de puntajes
+	        FileWriter escritorDeRanking = new FileWriter("ranking.txt");
+	        escritorDeRanking.write(datosDeRanking);
+	        escritorDeRanking.close(); 
+	    } catch (Exception e) {
+	        System.out.println("Error: No se pudo actualizar el archivo de ranking.");
+	    }
 	}
 
+	private String cargarRankingDesdeArchivo() {
+	    String rankingAcumulado = "";
+	    File archivoRanking = new File("ranking.txt");
+	    
+	    if (!archivoRanking.exists()) {
+	        return "";
+	    }
+
+	    try {
+	        // Escaneamos el archivo de texto linea por linea
+	        Scanner escaneadorDeArchivo = new Scanner(archivoRanking);
+	        while (escaneadorDeArchivo.hasNextLine()) {
+	            rankingAcumulado += escaneadorDeArchivo.nextLine() + "\n";
+	        }
+	        escaneadorDeArchivo.close();
+	    } catch (Exception e) {
+	        System.out.println("Error: No se pudo leer el historial de puntajes.");
+	    }
+	    return rankingAcumulado.trim();
+	}
+	
+	
 	public EstadoLetra[] intentar(String palabra) {
 		this.intentoActual++;
         ComparadorPalabras comp = new ComparadorPalabras(palabraSecreta);
