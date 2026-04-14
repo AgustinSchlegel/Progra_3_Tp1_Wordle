@@ -17,28 +17,26 @@ import sistema.SistemaLogica;
 import sistema.palabras_jugables;
 
 public class Menu extends JFrame {
+	
     private String idiomaSeleccionado = "Español";
-
+    private String dificultad = "Normal";
+    
     public Menu() {
-        // Configuraciones básicas de la ventana (solo una vez)
         setTitle("Wordle UNGS");
         setResizable(false);
         setSize(400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        // Al arrancar, mostramos el menú
+        
         mostrarMenuPrincipal();
     }
 
-    // Este metodo lo llamas desde afuera (Tablero) o desde el constructor
     public void mostrarMenuPrincipal() {
         this.setContentPane(generarPanelMenu());
         this.revalidate();
         this.repaint();
     }
 
-    // ACÁ está el método que preguntabas: es el que arma el "dibujo" del menú
     private JPanel generarPanelMenu() {
         JPanel panelContenedor = new JPanel(new GridBagLayout());
         panelContenedor.setBackground(new Color(18, 18, 18));
@@ -47,20 +45,25 @@ public class Menu extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Botón Iniciar
         gbc.gridy = 0;
         JButton iniciar = crearBotónEstandar("Iniciar Partida");
         iniciar.addActionListener(escucharBoton -> iniciarJuego());
         panelContenedor.add(iniciar, gbc);
 
-        // Botón Idioma
         gbc.gridy = 1;
         JButton idioma = crearBotónEstandar("Idioma");
         idioma.addActionListener(escucharBoton -> configurarIdioma());
         panelContenedor.add(idioma, gbc);
 
-        // Botón Salir
         gbc.gridy = 2;
+        JButton dificultadBtn = crearBotónEstandar("Dificultad: " + dificultad);
+        dificultadBtn.addActionListener(e -> {
+            dificultad = dificultad.equals("Normal") ? "Difícil" : "Normal";
+            dificultadBtn.setText("Dificultad: " + dificultad);
+        });
+        panelContenedor.add(dificultadBtn, gbc);
+        
+        gbc.gridy = 3;
         JButton salir = crearBotónEstandar("Salir");
         salir.addActionListener(escucharBoton -> System.exit(0));
         panelContenedor.add(salir, gbc);
@@ -69,7 +72,7 @@ public class Menu extends JFrame {
     }
 
     private void iniciarJuego() {
-        Tablero tablero = new Tablero(idiomaSeleccionado, this);
+        Tablero tablero = new Tablero(idiomaSeleccionado, dificultad, this);
         this.setContentPane(tablero);
         this.revalidate();
         this.repaint();

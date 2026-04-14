@@ -9,15 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-// 1. Ahora la clase HEREDA de JPanel
 public class Tablero extends JPanel{
-	//Frame
+	
     private Menu ventana;
-    
-    //
 	private SistemaLogica juego;
 	
-	//Paneles
 	private ComplementoVisual complementoVisual;
     private Cuadricula cuadricula;
     private EntradaDatos entradaDatos;    
@@ -26,10 +22,12 @@ public class Tablero extends JPanel{
 	private final int max_pistas = 2;
 	private boolean[] reveladas = new boolean[5];
 	private String idioma;
+	private String dificultad;
 
-    public Tablero(String idiomaRecibido,Menu ventana) {
+    public Tablero(String idiomaRecibido, String dificultad, Menu ventana) {
     	this.idioma =idiomaRecibido;
     	this.ventana=ventana;
+    	this.dificultad = dificultad;
 		setBackground(new Color(24, 24, 27));
         setLayout(new BorderLayout(0, 0));
         generarEntorno();
@@ -44,21 +42,16 @@ public class Tablero extends JPanel{
     	cuadricula= new Cuadricula(); 
     	entradaDatos = new EntradaDatos(); 
         
-
         String palabra = palabras_jugables.seleccionarPalabra(this.idioma);
         
         this.juego = new SistemaLogica(palabra);
         entradaDatos.setTablero(this);
         
-        //Agregamos directamente al panel (this)
         add(complementoVisual, BorderLayout.NORTH); 
         add(cuadricula, BorderLayout.CENTER); 
         add(entradaDatos, BorderLayout.SOUTH);
         
-        //Iniciamos el cronómetro
         complementoVisual.iniciarCronometro();
-        
-        //set tablero para las pistas
         complementoVisual.setTablero(this);
     }
 
@@ -70,16 +63,13 @@ public class Tablero extends JPanel{
 		if(juego.victoria(palabra)) {
 		    complementoVisual.pararCronometro();
 		    String tiempoFinal = complementoVisual.getTiempo();
-		    
 		    String nombreDelGanador = JOptionPane.showInputDialog(this, "¡Victoria! Ingresá tu nombre:");
-
+		    
 		    if(nombreDelGanador != null && !nombreDelGanador.trim().isEmpty()) {
 		        juego.cargarRanking(nombreDelGanador + " - " + tiempoFinal);
 		    }
-		    
 		    finalizarPartida();
 		}
-		
 		
 		if(juego.derrota()) {
 			JOptionPane.showMessageDialog(this, 
@@ -88,7 +78,6 @@ public class Tablero extends JPanel{
 			complementoVisual.pararCronometro();
 			 finalizarPartida();
 		}
-		
 	}
 	
 	private void finalizarPartida() {
@@ -110,7 +99,13 @@ public class Tablero extends JPanel{
 	        System.exit(0);
 	    }
 	}
+	
 	public void darPista() {
+		
+		if (dificultad.equals("Difícil")) {
+	        JOptionPane.showMessageDialog(this, "las pistas no estan disponibles en modo difícil");
+	        return;
+	    }
 		
 	    if (pistas >= max_pistas) {
 	        JOptionPane.showMessageDialog(this, "no quedan mas pistas");
@@ -122,7 +117,7 @@ public class Tablero extends JPanel{
 	    int fila = juego.getIntentoActual();
 
 	    for (int i = 0; i < palabra.length(); i++) {
-	        if (!reveladas[i] && cuadricula.estaVacia(fila, i) && !cuadricula.esVerde(i)) {
+	        if (!reveladas[i] && cuadricula.grillaestaVacia(fila, i) && !cuadricula.letraEsVerde(i)) {
 	            disponibles.add(i);
 	        }
 	    }

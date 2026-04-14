@@ -36,16 +36,19 @@ public class SistemaLogica {
         }
 
         lineas.add(nuevoRanking);
-        if (lineas.size() > 6) lineas.remove(0);
-
-        this.ranking = String.join("\n", lineas);
+        lineas.sort((a,b) -> {
+        	int tiempoA = parsearTiempo(a);
+        	int tiempoB = parsearTiempo(b);
+        	return Integer.compare(tiempoA, tiempoB);
+        });
         
+        if (lineas.size() > 6) lineas.remove(lineas.size() -1);
+        this.ranking = String.join("\n", lineas);
         guardarRankingEnArchivo(this.ranking);
     }
 
 	private void guardarRankingEnArchivo(String datosDeRanking) {
 	    try {
-	        // Usamos un nombre que indique que es el escritor del archivo de puntajes
 	        FileWriter escritorDeRanking = new FileWriter("ranking.txt");
 	        escritorDeRanking.write(datosDeRanking);
 	        escritorDeRanking.close(); 
@@ -63,7 +66,6 @@ public class SistemaLogica {
 	    }
 
 	    try {
-	        // Escaneamos el archivo de texto linea por linea
 	        Scanner escaneadorDeArchivo = new Scanner(archivoRanking);
 	        while (escaneadorDeArchivo.hasNextLine()) {
 	            rankingAcumulado += escaneadorDeArchivo.nextLine() + "\n";
@@ -75,6 +77,17 @@ public class SistemaLogica {
 	    return rankingAcumulado.trim();
 	}
 	
+	private int parsearTiempo(String entrada) {
+	    try {
+	        String tiempo = entrada.substring(entrada.lastIndexOf("-") + 1).trim(); // "01:23"
+	        String[] partes = tiempo.split(":");
+	        int minutos = Integer.parseInt(partes[0]);
+	        int segundos = Integer.parseInt(partes[1]);
+	        return minutos * 60 + segundos;
+	    } catch (Exception e) {
+	        return Integer.MAX_VALUE;
+	    }
+	}
 	
 	public EstadoLetra[] intentar(String palabra) {
 		this.intentoActual++;

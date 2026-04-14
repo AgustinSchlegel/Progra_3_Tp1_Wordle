@@ -12,12 +12,10 @@ public class Cuadricula extends JPanel {
 	
 	private bloque_Letra[][] grilla;
 
-    
 	public Cuadricula() {
 	    Color colorCuadrilla = new Color(24, 24, 27);
 		JPanel centrado = new JPanel();		
 		
-		//le da tamaño y margen de acomodo a los bloques generados por el metodo generarGrilla
         centrado.setLayout(new GridLayout(0, 5, 2, 2));
         centrado.setPreferredSize(new Dimension(400, 400));
         centrado.setBackground(colorCuadrilla);
@@ -44,7 +42,6 @@ public class Cuadricula extends JPanel {
         	    grilla[filaActual][i].cargarLetra(palabra.charAt(i), estados[i]);
         	}        
         }
-
         filaActual++;
     }
 	
@@ -55,11 +52,11 @@ public class Cuadricula extends JPanel {
 	    grilla[fila][columna].cargarLetra(letra, EstadoLetra.VERDE);
 	}
 
-	public boolean estaVacia(int fila, int columna) {
+	public boolean grillaestaVacia(int fila, int columna) {
 	    return grilla[fila][columna].getText().isEmpty();
 	}
 
-	public boolean esVerde(int columna) {
+	public boolean letraEsVerde(int columna) {
 	    for (int i = 0; i < grilla.length; i++) {
 	        if (grilla[i][columna].getBackground().equals(new Color(83, 141, 78))) {
 	            return true;
